@@ -9,12 +9,12 @@
     <State declare={{
       ok: 'test'
     }}/>
-    
+
     <div>{this.state.ok}</div>
 
     <button onClick={() => {this.setState({ok: 'nihao'})}}>test</button>
 
-    <Fetch url={'http://127.0.0.1:8000/test.json'} done={data => {
+    <Fetch url={'http://127.0.0.1:8000/package.json'} done={data => {
       console.log(data);
     }}/>
   </script>

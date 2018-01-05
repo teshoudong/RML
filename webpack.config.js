@@ -1,4 +1,5 @@
 const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = {
   entry: {
@@ -34,6 +35,11 @@ module.exports = {
     new CommonsChunkPlugin({
       name: 'vender',
       filename: './dist/[name].js'
+    }),
+    new UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
     })
   ]
 };
