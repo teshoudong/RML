@@ -4,6 +4,7 @@ const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 module.exports = {
   entry: {
     fetch: './src/fetch.js',
+    button: './src/button.js',
     main: './src/main.js',
     vender: ['react', 'react-dom', 'babel-standalone']
   },
@@ -17,7 +18,11 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader?presets[]=es2015&presets[]=react'
       },
-      { 
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
         test: require.resolve('react'), 
         loader: "expose-loader?$!expose-loader?React" 
       },
