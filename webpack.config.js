@@ -41,10 +41,10 @@ module.exports = {
       name: 'vender',
       filename: './dist/[name].js'
     }),
-    new UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
+    // new UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // })
   ]
 };
