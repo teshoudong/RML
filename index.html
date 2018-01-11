@@ -10,12 +10,14 @@
       ok: 'init'
     }}/>
 
+    <div>{this.state.ok}</div>
+
     <Button.Group>
       <Button onClick={() => this.setState({ok: 'Cancel'})}>Cancel</Button>
       <Button onClick={() => this.setState({ok: 'OK'})}>OK</Button>
     </Button.Group>
 
-    <Fetch url={'http://127.0.0.1:8000/package.json'} done={data => {
+    <Fetch url={'http://127.0.0.1:8000/package.json?' + this.state.ok} done={data => {
       console.log(data);
     }}/>
   </script>
