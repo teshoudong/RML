@@ -2987,69 +2987,69 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Fetch = function (_React$Component) {
-  _inherits(Fetch, _React$Component);
+    _inherits(Fetch, _React$Component);
 
-  function Fetch(props) {
-    _classCallCheck(this, Fetch);
+    function Fetch(props) {
+        _classCallCheck(this, Fetch);
 
-    var _this = _possibleConstructorReturn(this, (Fetch.__proto__ || Object.getPrototypeOf(Fetch)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Fetch.__proto__ || Object.getPrototypeOf(Fetch)).call(this, props));
 
-    _this.fetch(_this.props);
-    return _this;
-  }
-
-  _createClass(Fetch, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (nextProps.params !== this.props.params || nextProps.url !== this.props.url) {
-        this.fetch(nextProps);
-      }
+        _this.fetch(_this.props);
+        return _this;
     }
-  }, {
-    key: 'fetch',
-    value: function (_fetch) {
-      function fetch(_x) {
-        return _fetch.apply(this, arguments);
-      }
 
-      fetch.toString = function () {
-        return _fetch.toString();
-      };
+    _createClass(Fetch, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            if (nextProps.params !== this.props.params || nextProps.url !== this.props.url) {
+                this.fetch(nextProps);
+            }
+        }
+    }, {
+        key: 'fetch',
+        value: function (_fetch) {
+            function fetch(_x) {
+                return _fetch.apply(this, arguments);
+            }
 
-      return fetch;
-    }(function (_ref) {
-      var url = _ref.url,
-          params = _ref.params,
-          onResponse = _ref.onResponse,
-          onDone = _ref.onDone;
+            fetch.toString = function () {
+                return _fetch.toString();
+            };
 
-      params = params || {};
-      onResponse = onResponse || function (response) {
-        return response.json();
-      };
-      onDone = onDone || function () {};
+            return fetch;
+        }(function (_ref) {
+            var url = _ref.url,
+                params = _ref.params,
+                onResponse = _ref.onResponse,
+                onDone = _ref.onDone;
 
-      _nprogress2.default.start();
-      fetch(url, params).then(onResponse).then(function (res) {
-        _nprogress2.default.done();
-        onDone(res);
-      });
-    })
-  }, {
-    key: 'render',
-    value: function render() {
-      return null;
-    }
-  }]);
+            params = params || {};
+            onResponse = onResponse || function (response) {
+                return response.json();
+            };
+            onDone = onDone || function () {};
 
-  return Fetch;
+            _nprogress2.default.start();
+            fetch(url, params).then(onResponse).then(function (res) {
+                _nprogress2.default.done();
+                onDone(res);
+            });
+        })
+    }, {
+        key: 'render',
+        value: function render() {
+            return null;
+        }
+    }]);
+
+    return Fetch;
 }(React.Component);
 
 Fetch.propTypes = {
-  url: _propTypes2.default.string.isRequired,
-  params: _propTypes2.default.object,
-  onResponse: _propTypes2.default.func,
-  onDone: _propTypes2.default.func
+    url: _propTypes2.default.string.isRequired,
+    params: _propTypes2.default.object,
+    onResponse: _propTypes2.default.func,
+    onDone: _propTypes2.default.func
 };
 
 window.Fetch = Fetch;

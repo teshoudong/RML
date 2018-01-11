@@ -11,49 +11,49 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Main = function () {
-  function Main() {
-    _classCallCheck(this, Main);
+    function Main() {
+        _classCallCheck(this, Main);
 
-    var rml = this.getRml();
-    this.createContainer();
-    this.createScript('\n      class RMLMain extends React.Component {\n        state = {\n          ' + rml.state + '\n        }\n        \n        render() {\n          return (\n            <div>\n              ' + rml.content + '\n            </div>\n          );\n        }\n      }\n    \n      ReactDOM.render(\n        <RMLMain/>,\n        document.getElementById(\'container\')\n      )\n    ');
-  }
+        var rml = this.getRml();
+        this.createContainer();
+        this.createScript('\n            class RMLMain extends React.Component {\n                state = {\n                    ' + rml.state + '\n                }\n              \n                render() {\n                    return (\n                        <div>\n                            ' + rml.content + '\n                        </div>\n                    );\n                }\n            }\n        \n            ReactDOM.render(\n                <RMLMain/>,\n                document.getElementById(\'container\')\n            )\n        ');
+    }
 
-  _createClass(Main, [{
-    key: 'createContainer',
-    value: function createContainer() {
-      var container = document.createElement('div');
-      container.id = 'container';
-      document.body.appendChild(container);
-    }
-  }, {
-    key: 'createScript',
-    value: function createScript(content) {
-      var script = document.createElement('script');
-      script.innerHTML = content;
-      script.type = 'text/babel';
-      document.body.appendChild(script);
-    }
-  }, {
-    key: 'getRml',
-    value: function getRml() {
-      var rml = '';
-      for (var i = 0; i < document.scripts.length; i++) {
-        if (document.scripts[i].type === 'text/rml') {
-          rml = document.scripts[i].innerHTML;
+    _createClass(Main, [{
+        key: 'createContainer',
+        value: function createContainer() {
+            var container = document.createElement('div');
+            container.id = 'container';
+            document.body.appendChild(container);
         }
-      }
-      var content = rml.replace(/\<State[\s\S]*?\/\>/gi, '');
-      var match = rml.match(/\<State\s*declare=\{\{((\s|\S)*?)\}\}\/\>/);
-      var state = match ? match[1] : '';
-      return {
-        content: content,
-        state: state
-      };
-    }
-  }]);
+    }, {
+        key: 'createScript',
+        value: function createScript(content) {
+            var script = document.createElement('script');
+            script.innerHTML = content;
+            script.type = 'text/babel';
+            document.body.appendChild(script);
+        }
+    }, {
+        key: 'getRml',
+        value: function getRml() {
+            var rml = '';
+            for (var i = 0; i < document.scripts.length; i++) {
+                if (document.scripts[i].type === 'text/rml') {
+                    rml = document.scripts[i].innerHTML;
+                }
+            }
+            var content = rml.replace(/\<State[\s\S]*?\/\>/gi, '');
+            var match = rml.match(/\<State\s*declare=\{\{((\s|\S)*?)\}\}\/\>/);
+            var state = match ? match[1] : '';
+            return {
+                content: content,
+                state: state
+            };
+        }
+    }]);
 
-  return Main;
+    return Main;
 }();
 
 new Main();

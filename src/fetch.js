@@ -5,41 +5,41 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
 class Fetch extends React.Component {
-  constructor(props) {
-    super(props);
-    this.fetch(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.params !== this.props.params || nextProps.url !== this.props.url) {
-      this.fetch(nextProps);
+    constructor(props) {
+        super(props);
+        this.fetch(this.props);
     }
-  }
 
-  fetch({url, params, onResponse, onDone}) {
-    params = params || {};
-    onResponse = onResponse || (response => response.json());
-    onDone = onDone || (() => {});
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.params !== this.props.params || nextProps.url !== this.props.url) {
+            this.fetch(nextProps);
+        }
+    }
 
-    NProgress.start();
-    fetch(url, params)
-      .then(onResponse)
-      .then(res => {
-        NProgress.done();
-        onDone(res);
-      });
-  }
+    fetch({url, params, onResponse, onDone}) {
+        params = params || {};
+        onResponse = onResponse || (response => response.json());
+        onDone = onDone || (() => {});
 
-  render() {
-    return null;
-  }
+        NProgress.start();
+        fetch(url, params)
+            .then(onResponse)
+            .then(res => {
+                NProgress.done();
+                onDone(res);
+            });
+    }
+
+    render() {
+        return null;
+    }
 }
 
 Fetch.propTypes = {
-  url: PropTypes.string.isRequired,
-  params: PropTypes.object,
-  onResponse: PropTypes.func,
-  onDone: PropTypes.func
+    url: PropTypes.string.isRequired,
+    params: PropTypes.object,
+    onResponse: PropTypes.func,
+    onDone: PropTypes.func
 };
 
 window.Fetch = Fetch;

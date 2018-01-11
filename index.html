@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
 </head>
 <body>
-  <script type="text/rml">
-    <State declare={{
-      ok: 'init'
-    }}/>
+    <script type="text/rml">
+        <State declare={{
+            ok: 'init'
+        }}/>
 
-    <div>{this.state.ok}</div>
+        <div>{this.state.ok}</div>
 
-    <Button.Group>
-      <Button onClick={() => this.setState({ok: 'Cancel'})}>Cancel</Button>
-      <Button onClick={() => this.setState({ok: 'OK'})}>OK</Button>
-    </Button.Group>
+        <Button.Group>
+            <Button onClick={() => this.setState({ok: 'Cancel'})}>Cancel</Button>
+            <Button onClick={() => this.setState({ok: 'OK'})}>OK</Button>
+        </Button.Group>
 
-    <Fetch url={'http://127.0.0.1:8000/package.json?' + this.state.ok} done={data => {
-      console.log(data);
-    }}/>
-  </script>
-  <script src="./dist/vender.js"></script>
-  <script src="./dist/fetch.js"></script>
-  <script src="./dist/button.js"></script>
-  <script src="./dist/main.js"></script>
+        <Fetch url={'http://127.0.0.1:8000/package.json?' + this.state.ok} done={data => {
+            console.log(data);
+        }}/>
+    </script>
+    <script src="./dist/vender.js"></script>
+    <script src="./dist/fetch.js"></script>
+    <script src="./dist/button.js"></script>
+    <script src="./dist/main.js"></script>
 </body>
 </html>
