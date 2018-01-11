@@ -5,7 +5,7 @@ class Main {
     this.createScript(`
       class RMLMain extends React.Component {
         state = {
-            ${rml.state}
+          ${rml.state}
         }
         
         render() {
