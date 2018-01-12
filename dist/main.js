@@ -1,6 +1,6 @@
-webpackJsonp([2],{
+webpackJsonp([13],{
 
-/***/ 124:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,7 +16,7 @@ var Main = function () {
 
         var rml = this.getRml();
         this.createContainer();
-        this.createScript('\n            class RMLMain extends React.Component {\n                state = {\n                    ' + rml.state + '\n                }\n              \n                render() {\n                    return (\n                        <div>\n                            ' + rml.content + '\n                        </div>\n                    );\n                }\n            }\n        \n            ReactDOM.render(\n                <RMLMain/>,\n                document.getElementById(\'container\')\n            )\n        ');
+        this.createScript('\n            class RMLMain extends React.Component {\n                constructor(props) {\n                    super(props);\n                    this.state = {\n                        ' + rml.state + '\n                    };\n                }\n              \n                render() {\n                    return (\n                        <div>\n                            ' + rml.content + '\n                        </div>\n                    );\n                }\n            }\n        \n            ReactDOM.render(\n                <RMLMain/>,\n                document.getElementById(\'container\')\n            )\n        ');
     }
 
     _createClass(Main, [{
@@ -60,4 +60,4 @@ new Main();
 
 /***/ })
 
-},[124]);
+},[279]);

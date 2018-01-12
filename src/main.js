@@ -4,8 +4,11 @@ class Main {
         this.createContainer();
         this.createScript(`
             class RMLMain extends React.Component {
-                state = {
-                    ${rml.state}
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        ${rml.state}
+                    };
                 }
               
                 render() {

@@ -7,23 +7,76 @@
 <body>
     <script type="text/rml">
         <State declare={{
-            ok: 'init'
+            dataSource: []
         }}/>
 
-        <div>{this.state.ok}</div>
+        <div style={{background: '#ECECEC', padding: '30px'}}>
+            <Fetch url="//localhost:8000/package.json" onDone={data => this.setState({dataSource: [data]})}/>
 
-        <Button.Group>
-            <Button onClick={() => this.setState({ok: 'Cancel'})}>Cancel</Button>
-            <Button onClick={() => this.setState({ok: 'OK'})}>OK</Button>
-        </Button.Group>
+            <Card title="组件">
+                <Row type="flex" justify="start" gutter={16} style={{marginBottom: '10px'}}>
+                    <Col>
+                        <Button htmlType="button">
+                            <Action label="添加组件">
+                                <Modal title="添加组件">
+                                    <Form layout="inline">
+                                        <Form.Item label="名称">
+                                            <Input name="name" placeholder="请输入名称"/>
+                                        </Form.Item>
+                                        <Form.Item label="版本">
+                                            <Input name="version" placeholder="请输入版本"/>
+                                        </Form.Item>
+                                    </Form>
+                                </Modal>
+                            </Action>
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Input.Search
+                            placeholder="请输入搜索内容"
+                            enterButton="搜索"
+                        />
+                    </Col>
+                </Row>
 
-        <Fetch url={'http://127.0.0.1:8000/package.json?' + this.state.ok} done={data => {
-            console.log(data);
-        }}/>
+                <Table
+                    rowKey="name"
+                    dataSource={this.state.dataSource}>
+                    <Table.Column
+                        title="名称"
+                        dataIndex="name"
+                        key="name"/>
+                     <Table.Column
+                        title="版本"
+                        dataIndex="version"
+                        key="version"/>
+                     <Table.Column
+                        title="操作"
+                        render={() => (
+                            <Action label="删除">
+                                <Modal title="删除">
+                                    是否删除该按钮？
+                                </Modal>
+                            </Action>
+                        )}/>
+                </Table>
+            </Card>
+        </div>
     </script>
     <script src="./dist/vender.js"></script>
     <script src="./dist/fetch.js"></script>
     <script src="./dist/button.js"></script>
+    <script src="./dist/action.js"></script>
+    <script src="./dist/table.js"></script>
+    <script src="./dist/pagination.js"></script>
+    <script src="./dist/icon.js"></script>
+    <script src="./dist/input.js"></script>
+    <script src="./dist/select.js"></script>
+    <script src="./dist/form.js"></script>
+    <script src="./dist/row.js"></script>
+    <script src="./dist/col.js"></script>
+    <script src="./dist/modal.js"></script>
+    <script src="./dist/card.js"></script>
     <script src="./dist/main.js"></script>
 </body>
 </html>

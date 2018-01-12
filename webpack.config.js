@@ -4,8 +4,19 @@ const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 module.exports = {
     entry: {
         fetch: './src/fetch.js',
-        button: './src/button.js',
+        action: './src/action.js',
         main: './src/main.js',
+        button: './src/button.js',
+        table: './src/table.js',
+        pagination: './src/pagination.js',
+        icon: './src/icon.js',
+        input: './src/input.js',
+        select: './src/select.js',
+        form: './src/form.js',
+        row: './src/row.js',
+        col: './src/col.js',
+        modal: './src/modal.js',
+        card: './src/card.js',
         vender: ['react', 'react-dom', 'babel-standalone']
     },
     output: {
