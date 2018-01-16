@@ -8,25 +8,25 @@ class RMlModal extends React.Component {
         this.state = {
             visible: true
         };
+        this.newProps = Object.assign({}, this.props, {
+            onCancel: event => {
+                this.props.onCancel && this.props.onCancel(this, event);
+                this.close();
+            },
+            onOk: event => this.props.onOk && this.props.onOk(this, event),
+            visible: this.state.visible
+        });
     }
 
-    handleClose() {
+    close() {
         this.setState({
             visible: false
         });
     }
 
     render() {
-        let props = Object.assign({}, this.props, {
-            onCancel: () => this.handleClose(),
-            visible: this.state.visible
-        });
-
-        return (
-            <div>
-                <Modal {...props}>{this.props.children}</Modal>
-            </div>
-        );
+        this.newProps.visible = this.state.visible;
+        return <Modal {...this.newProps}>{this.props.children}</Modal>;
     }
 }
 

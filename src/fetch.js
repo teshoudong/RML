@@ -17,10 +17,6 @@ class Fetch extends React.Component {
     }
 
     fetch({url, params, onResponse, onDone}) {
-        params = params || {};
-        onResponse = onResponse || (response => response.json());
-        onDone = onDone || (() => {});
-
         NProgress.start();
         fetch(url, params)
             .then(onResponse)
@@ -34,6 +30,12 @@ class Fetch extends React.Component {
         return null;
     }
 }
+
+Fetch.defaultProps = {
+    params: {},
+    onResponse: response => response.json(),
+    onDone: () => {}
+};
 
 Fetch.propTypes = {
     url: PropTypes.string.isRequired,

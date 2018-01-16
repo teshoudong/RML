@@ -7,19 +7,24 @@
 <body>
     <script type="text/rml">
         <State declare={{
-            dataSource: []
+            dataSource: [],
+            searchContent: ``
         }}/>
 
         <div style={{background: '#ECECEC', padding: '30px'}}>
-            <Fetch url="//localhost:8000/package.json" onDone={data => this.setState({dataSource: [data]})}/>
+            <Fetch url={'//localhost:8080/package.json?searchContent=' + this.state.searchContent} onDone={data => this.setState({dataSource: [data]})}/>
 
             <Card title="组件">
                 <Row type="flex" justify="start" gutter={16} style={{marginBottom: '10px'}}>
                     <Col>
                         <Button htmlType="button">
                             <Action label="添加组件">
-                                <Modal title="添加组件">
-                                    <Form layout="inline">
+                                <Modal title="添加组件" onOk={modal => {
+                                    const values = this.refs.addForm.getValues();
+                                    console.log(values);
+                                    modal.close();
+                                }}>
+                                    <Form layout="inline" ref="addForm">
                                         <Form.Item label="名称">
                                             <Input name="name" placeholder="请输入名称"/>
                                         </Form.Item>
@@ -35,6 +40,7 @@
                         <Input.Search
                             placeholder="请输入搜索内容"
                             enterButton="搜索"
+                            onSearch={value => this.setState({searchContent: value})}
                         />
                     </Col>
                 </Row>
@@ -52,10 +58,10 @@
                         key="version"/>
                      <Table.Column
                         title="操作"
-                        render={() => (
+                        render={(text, record, index) => (
                             <Action label="删除">
-                                <Modal title="删除">
-                                    是否删除该按钮？
+                                <Modal title="删除" onOk={modal => modal.close()}>
+                                    是否删除{record.name}？
                                 </Modal>
                             </Action>
                         )}/>
