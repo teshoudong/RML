@@ -4,6 +4,7 @@ const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 module.exports = {
     entry: {
         fetch: './src/fetch.js',
+        router: './src/router.js',
         action: './src/action.js',
         main: './src/main.js',
         button: './src/button.js',

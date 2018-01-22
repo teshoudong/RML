@@ -5,7 +5,22 @@
     <title>Document</title>
 </head>
 <body>
-    <script type="text/rml">
+    <script type="text/rml" name="page">
+        <Button>New Page</Button>
+    </script>
+
+    <script type="text/rml" name="addForm">
+        <Form layout="inline">
+            <Form.Item label="名称">
+                <Input name="name" placeholder="请输入名称"/>
+            </Form.Item>
+            <Form.Item label="版本">
+                <Input name="version" placeholder="请输入版本"/>
+            </Form.Item>
+        </Form>
+    </script>
+
+    <script type="text/rml" name="app">
         <State declare={{
             dataSource: [],
             searchContent: ``
@@ -19,20 +34,11 @@
                     <Col>
                         <Button htmlType="button">
                             <Action label="添加组件">
-                                <Modal title="添加组件" onOk={modal => {
-                                    const values = this.refs.addForm.getValues();
+                                <Modal title="添加组件" template="addForm" onOk={modal => {
+                                    const values = modal.form.getValues();
                                     console.log(values);
                                     modal.close();
-                                }}>
-                                    <Form layout="inline" ref="addForm">
-                                        <Form.Item label="名称">
-                                            <Input name="name" placeholder="请输入名称"/>
-                                        </Form.Item>
-                                        <Form.Item label="版本">
-                                            <Input name="version" placeholder="请输入版本"/>
-                                        </Form.Item>
-                                    </Form>
-                                </Modal>
+                                }}></Modal>
                             </Action>
                         </Button>
                     </Col>
@@ -69,8 +75,19 @@
             </Card>
         </div>
     </script>
+
+    <script type="text/rml">
+        <Router>
+            <Switch>
+                <Route exact path="/" template="app"></Route>
+                <Route exact path="/page" template="page"></Route>
+            </Switch>
+        </Router>
+    </script>
+
     <script src="./dist/vender.js"></script>
     <script src="./dist/fetch.js"></script>
+    <script src="./dist/router.js"></script>
     <script src="./dist/button.js"></script>
     <script src="./dist/action.js"></script>
     <script src="./dist/table.js"></script>

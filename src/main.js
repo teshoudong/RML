@@ -1,27 +1,54 @@
 class Main {
     constructor() {
-        const rml = this.getRml();
+        const scripts = this.getRmls();
         this.createContainer();
         this.createScript(`
-            class RMLMain extends React.Component {
+            ${scripts.rmls.map(rml => `
+                class $${rml.name} extends React.Component {
+                    constructor(props) {
+                        super(props);
+                        this.state = {
+                            ${rml.state}
+                        };
+                    }
+                  
+                    render() {
+                        return (
+                            <div>
+                                ${rml.content}
+                            </div>
+                        );
+                    }
+                }
+            `).join('')}
+            
+            class $RMLMain extends React.Component {
                 constructor(props) {
                     super(props);
                     this.state = {
-                        ${rml.state}
+                        ${scripts.main.state}
                     };
+                }
+                
+                getTemplate(name) {
+                    return $RMLMain['$' + name];
                 }
               
                 render() {
                     return (
                         <div>
-                            ${rml.content}
+                            ${scripts.main.content}
                         </div>
                     );
                 }
             }
-        
+            
+            ${scripts.rmls.map(rml => `
+                $RMLMain.$${rml.name} = $${rml.name};
+            `).join('')}
+            
             ReactDOM.render(
-                <RMLMain/>,
+                <$RMLMain/>,
                 document.getElementById('container')
             )
         `);
@@ -40,13 +67,7 @@ class Main {
         document.body.appendChild(script);
     }
 
-    getRml() {
-        let rml = '';
-        for (let i = 0; i < document.scripts.length; i++) {
-            if (document.scripts[i].type === 'text/rml') {
-                rml = document.scripts[i].innerHTML;
-            }
-        }
+    getState(rml) {
         const content = rml.replace(/\<State[\s\S]*?\/\>/gi, '');
         const match = rml.match(/\<State\s*declare=\{\{((\s|\S)*?)\}\}\/\>/);
         const state = match ? match[1] : '';
@@ -54,6 +75,32 @@ class Main {
             content,
             state
         };
+    }
+
+    getRmls() {
+        let rmls = [];
+        let mainRml = '';
+        for (let i = 0; i < document.scripts.length; i++) {
+            const script = document.scripts[i];
+            const name = script.getAttribute('name');
+            if (script.type === 'text/rml' && !name) {
+                mainRml += script.innerHTML;
+            } else if (script.type === 'text/rml' && name) {
+                const {state, content} = this.getState(script.innerHTML);
+                rmls.push({
+                    name,
+                    content,
+                    state
+                });
+            }
+        }
+
+        const scripts = {
+            main: mainRml && this.getState(mainRml),
+            rmls
+        };
+
+        return scripts;
     }
 }
 
