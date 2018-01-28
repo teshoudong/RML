@@ -10,7 +10,7 @@
     </script>
 
     <script type="text/rml" name="addForm">
-        <Form layout="inline">
+        <Form layout="inline" ref={form => this.props.parent.form = form}>
             <Form.Item label="名称">
                 <Input name="name" placeholder="请输入名称"/>
             </Form.Item>
@@ -27,7 +27,7 @@
         }}/>
 
         <div style={{background: '#ECECEC', padding: '30px'}}>
-            <Fetch url={'//localhost:8080/package.json?searchContent=' + this.state.searchContent} onDone={data => this.setState({dataSource: [data]})}/>
+            <Fetch url={'//localhost:8081/package.json?searchContent=' + this.state.searchContent} onDone={data => this.setState({dataSource: [data]})}/>
 
             <Card title="组件">
                 <Row type="flex" justify="start" gutter={16} style={{marginBottom: '10px'}}>
