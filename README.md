@@ -1,3 +1,5 @@
+Rml is a more easier way to write React by using Ant Design Components. You can finish your page without scaffolding.
+
 # Getting started
 
 ```

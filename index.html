@@ -5,22 +5,7 @@
     <title>Document</title>
 </head>
 <body>
-    <script type="text/rml" name="page">
-        <Button>New Page</Button>
-    </script>
-
-    <script type="text/rml" name="addForm">
-        <Form layout="inline" ref={form => this.props.parent.form = form}>
-            <Form.Item label="名称">
-                <Input name="name" placeholder="请输入名称"/>
-            </Form.Item>
-            <Form.Item label="版本">
-                <Input name="version" placeholder="请输入版本"/>
-            </Form.Item>
-        </Form>
-    </script>
-
-    <script type="text/rml" name="app">
+    <script type="text/rml">
         <State declare={{
             dataSource: [],
             searchContent: ''
@@ -74,15 +59,6 @@
                 </Table>
             </Card>
         </div>
-    </script>
-
-    <script type="text/rml">
-        <Router>
-            <Switch>
-                <Route exact path="/" template="app"></Route>
-                <Route exact path="/page" template="page"></Route>
-            </Switch>
-        </Router>
     </script>
 
     <script src="./dist/vender.js"></script>
